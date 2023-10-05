@@ -1,6 +1,6 @@
-# INFLUENCERS DATABASE
+# INFLUENCERS TWITCH DATABASE
 
-Scrape information about twitch streamers and save it to database.
+Scrape information about twitch streamers and save it to database. Connect to database using GraphQL. 
 
 Users
 ![README_channels.png](README_channels.png)
@@ -43,3 +43,10 @@ It will scrape 1000 current streams (100 per batch)
 npm run app
 ```
 visit http://localhost:3000/graphiql
+
+### License
+
+GNU General Public License v3.0
+
+
+Developer @ncsft
