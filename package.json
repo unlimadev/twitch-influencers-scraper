@@ -1,0 +1,32 @@
+{
+  "name": "influencers-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app": "node ./src/runners/server.js",
+    "db:migrate": "node_modules/.bin/knex migrate:latest",
+    "db:migrate:make": "node_modules/.bin/knex migrate:make",
+    "db:rollback": "node_modules/.bin/knex migrate:rollback --all",
+    "db:seed": "node_modules/.bin/knex seed:run",
+    "db:refresh": "npm run db:seed && npm run db:migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^8.4.0",
+    "@twurple/api": "^7.0.3",
+    "@twurple/auth": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.23.2",
+    "knex": "^2.5.1",
+    "mercurius": "^13.1.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1"
+  }
+}

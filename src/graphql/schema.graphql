@@ -1,0 +1,167 @@
+type Query {
+    TwitchChannelsByUUID(uuid: [String]) : [TwitchChannel]
+    TwitchChannelsByGID(gid: [String]) : [TwitchChannel]
+    TwitchChannelsTop(
+        search: String,
+        views: String,
+        followers: String,
+        limit: Int,
+        offset: Int,
+        order: String
+    ): TwitchChannelsPaginated
+    TwitchChannelsNew(
+        search: String,
+        views: String,
+        followers: String,
+        limit: Int,
+        offset: Int,
+        order: String,
+    ): TwitchChannelsPaginated
+    TwitchChannelsSearchFilters(type: String): TwitchChannelsSearchFilter
+    TwitchChannelsTypeahead(search: String, internal: Boolean, external: Boolean): TwitchChannelsTypeahead
+    TwitchStreamsTop(
+        search: String,
+        limit: Int,
+        offset: Int,
+        order: String
+    ): TwitchStreamsPaginated
+}
+
+type Mutation {
+    TwitchChannelUpsert(uuid: String) : TwitchChannel
+}
+
+type TwitchChannel {
+    id: Int
+    gid: String
+    uuid: String
+    title: String
+    description: String
+    views: Int
+    followers: Int
+    subscribers: Int
+    thumbnail: String
+    link: String
+    publishedAt: String
+    updatedAt: String
+    labels: TwitchChannelLabels
+    lastStreams(limit: Int): [TwitchStream]
+    lastStreamsWeek: [TwitchStream]
+    streamsAggregates: [TwitchStreamAggregatesPoint]
+}
+
+type TwitchChannelsSearchFilter {
+    filters: TwitchChannelsSearchFilterFilter
+    data: TwitchChannelsSearchFilterData
+}
+
+type TwitchChannelsSearchFilterFilter {
+    type: String
+}
+
+type TwitchChannelsSearchFilterData {
+    views: String
+    followers: String
+}
+
+type TwitchChannelLabels {
+    new: Boolean
+}
+
+type TwitchChannelFilter {
+    search: String
+    views: String
+    followers: String
+    rank: String
+    order: String
+}
+
+type TwitchChannelsPaginated {
+    filters: TwitchChannelFilter
+    pagination: Pagination
+    list: [TwitchChannel]
+}
+
+type TwitchStreamFilter {
+    search: String
+    order: String
+}
+
+type TwitchStreamsPaginated {
+    filters: TwitchStreamFilter
+    pagination: Pagination
+    list: [TwitchStreamContent]
+}
+
+type Pagination {
+    count: Int
+    limit: Int
+    offset: Int
+}
+
+type TwitchStream {
+    uuid: String
+    title: String
+    startedAt: String
+    updatedAt: String
+    tags: [TwitchTag]
+    game: TwitchGame
+    viewers: Int
+}
+
+type TwitchStreamContent {
+    uuid: String
+    title: String
+    publishedAt: String
+    updatedAt: String
+    tags: [String]
+    game: String
+    viewers: Int
+    channel: TwitchChannel
+    thumbnail: String
+}
+
+type TwitchGame {
+    uuid: String
+    title: String
+    thumbnail: String
+    link: String
+}
+
+type TwitchTag {
+    uuid: String
+    title: String
+    link: String
+}
+
+type TwitchChannelsTypeaheadFilter {
+    search: String
+    internal: Boolean
+    external: Boolean
+}
+
+type TwitchChannelsTypeaheadItem {
+    gid: String
+    uuid: String
+    title: String
+    thumbnail: String
+    link: String
+}
+
+type TwitchChannelsTypeahead {
+    filters: TwitchChannelsTypeaheadFilter
+    internal: [TwitchChannelsTypeaheadItem]
+    external: [TwitchChannelsTypeaheadItem]
+}
+
+type TwitchTrends {
+    games: [TwitchGame]
+    streams: [TwitchStream]
+    updatedAt: String
+}
+
+type TwitchStreamAggregatesPoint {
+    date: String
+    viewers: String
+    duration: String
+}
